@@ -1,0 +1,23 @@
+.AddUser {
+    margin: 10vh;
+}
+
+.AddUser .InputGroup {
+    display: flex;
+    margin: 0 35%;
+    padding: 10px;
+}
+
+.AddUser .Label {
+    width: 30%;
+    text-align: right;
+    margin: 0 16px;
+}
+
+.AddUser .AU-Button {
+    width: 75px;
+    margin: 20px 10px;
+    cursor: pointer;
+    border-radius: 50px;
+    outline: none;
+}

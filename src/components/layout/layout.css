@@ -1,0 +1,26 @@
+.Layout .AppHeader {
+    width: 100%;
+    height: 32px;
+    background-color: rgb(237, 186, 158);
+    color: white;
+    padding: 5px;
+}
+
+.Layout .NavMenu {
+    width: 100%;
+    padding: 5px;
+    background-color: rgb(166, 193, 220);
+    display: inline-flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.Layout .Navlink {
+    margin: 0px 20px;
+    cursor: pointer;
+}
+
+.Navlink:hover {
+    font-weight: bold;
+    color: lightslategray;
+}
