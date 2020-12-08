@@ -10,6 +10,7 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
+    // console.log('All Users >>> ', state.allUsers)
     switch (action.type) {
         case ADD_USER:
             return {

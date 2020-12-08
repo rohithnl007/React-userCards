@@ -6,12 +6,20 @@ import './addUser.css';
 
 const addUser = (props) => {
 
-    const onContinueAddingUser = () => {
-        console.log('props >>> ', props);
-        // props.addUserAction('name :: ', 'Rohit');
-        // props.addUserAction('email :: ', 'Rohit');
-        // props.addUserAction('designation :: ', 'Rohit');
+    const onContinueAddingUser = (event) => {
+        event.preventDefault();
+        const userData = {
+            name: event.target[0].value,
+            email: event.target[1].value,
+            designation: event.target[2].value
+        }
+        props.addUserAction(userData);
     }
+
+    // const onCancelAddingUser = (event) => {
+    //     // event.preventDefault();
+    //     // event.target[0].reset();
+    // }
 
     return (
         <div className='AddUser'>
@@ -38,8 +46,8 @@ const addUser = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addUserAction: 
+        addUserAction: (name, email, designation) => dispatch(addUserAction(name, email, designation))
     }
 }
 
-export default connect(null, { addUserAction })(addUser);
+export default connect(null, mapDispatchToProps)(addUser);
