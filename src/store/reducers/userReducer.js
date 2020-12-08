@@ -1,28 +1,30 @@
 import { ADD_USER, GET_USERS } from '../actions/actionTypes';
 
 const initialState = {
-    allUsers: [],
-    user: {
-        name: '',
-        email: '',
-        designation: ''
-    }
+    allUsers: []
 };
 
+const userIdGenerator = (users) => {
+    const nextUserId = users.reduce((latestId, user) => Math.max(user.id, latestId), -1);
+    return nextUserId + 1;
+}
+
 const userReducer = (state = initialState, action) => {
-    // console.log('All Users >>> ', state.allUsers)
     switch (action.type) {
         case ADD_USER:
             return {
                 ...state,
-                user: {
-                    ...state.user,
-                    name: action.payload.name,
-                    email: action.payload.email,
-                    designation: action.payload.designation
-                },
+                // allUsers: [
+                //     ...state.allUsers.concat(action.payload)
+                // ]
                 allUsers: [
-                    ...state.allUsers.concat(state.user)
+                    ...state.allUsers,
+                    {
+                        id: userIdGenerator(state.allUsers),
+                        name: action.payload.name,
+                        email: action.payload.email,
+                        designation: action.payload.designation
+                    }
                 ]
             }
         case GET_USERS:

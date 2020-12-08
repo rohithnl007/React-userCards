@@ -1,25 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addUserAction } from '../../../store/actions/userActions';
 
 import './addUser.css';
 
-const addUser = (props) => {
+const AddUser = (props) => {
+
+    const [userData, setUserData] = useState({
+        name: '',
+        email: '',
+        designation: ''
+    });
+
+    const inputChangeHandler = (event) => {
+        const { name, value } = event.target;
+
+        setUserData((prevState) => ({
+            ...prevState,
+            [name]: value
+        })
+        )
+    };
+
+    const onCancelAddingUser = () => {
+        setUserData({
+            name: '',
+            email: '',
+            designation: ''
+        })
+    };
 
     const onContinueAddingUser = (event) => {
         event.preventDefault();
-        const userData = {
-            name: event.target[0].value,
-            email: event.target[1].value,
-            designation: event.target[2].value
-        }
         props.addUserAction(userData);
-    }
-
-    // const onCancelAddingUser = (event) => {
-    //     // event.preventDefault();
-    //     // event.target[0].reset();
-    // }
+        setUserData({
+            name: '',
+            email: '',
+            designation: ''
+        })
+    };
 
     return (
         <div className='AddUser'>
@@ -27,17 +46,17 @@ const addUser = (props) => {
             <form onSubmit={onContinueAddingUser}>
                 <div className='InputGroup'>
                     <label className='Label'>Name</label>
-                    <input type='text' placeholder='your name' />
+                    <input type='text' placeholder='your name' name='name' onChange={inputChangeHandler} value={userData.name} />
                 </div>
                 <div className='InputGroup'>
                     <label className='Label'>Email Id</label>
-                    <input type='input' placeholder='your email id' />
+                    <input type='email' placeholder='your email id' name='email' onChange={inputChangeHandler} value={userData.email} />
                 </div>
                 <div className='InputGroup'>
                     <label className='Label'>Designation</label>
-                    <input type='text' placeholder='your designation' />
+                    <input type='text' placeholder='your designation' name='designation' onChange={inputChangeHandler} value={userData.designation} />
                 </div>
-                {/* <button className='AU-Button' onClick={onCancelAddingUser}>Cancel</button> */}
+                <button className='AU-Button' onClick={onCancelAddingUser}>Cancel</button>
                 <button className='AU-Button' type='submit'>Add</button>
             </form>
         </div>
@@ -46,8 +65,8 @@ const addUser = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addUserAction: (name, email, designation) => dispatch(addUserAction(name, email, designation))
+        addUserAction: (userData) => dispatch(addUserAction(userData))
     }
 }
 
-export default connect(null, mapDispatchToProps)(addUser);
+export default connect(null, mapDispatchToProps)(AddUser);
